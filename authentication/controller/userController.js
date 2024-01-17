@@ -1,6 +1,8 @@
 const UserModel = require("../model/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const dotenv = require("dotenv")
+dotenv.config()
 const BlackListModel = require("../model/blacklistmodel");
 
 const getAllUser = async (req, res) => {
@@ -15,7 +17,7 @@ const getAllUser = async (req, res) => {
 const register = async (req, res) => {
   try {
     const { userName, email, password } = req.body;
-    bcrypt.hash(password, process.env.SALT_ROUNDS, async (err, hash) => {
+    bcrypt.hash(password,process.env.SALT_ROUNDS, async (err, hash) => {
       if (err) {
         throw err;
       } else {
