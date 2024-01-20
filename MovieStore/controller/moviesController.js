@@ -7,11 +7,9 @@ moviesRouter.get("/", async (req, res) => {
     const query = {};
     if (req.query.movieTitle) {
       query.movieTitle = new RegExp(req.query.movieTitle);
-      console.log(req.query.movieTitle);
     }
     if (req.query.rating) {
       req.query.rating = { $eq: req.query.rating };
-      console.log(req.query.rating);
     }
   
     const page = parseInt(req.query.page) || 1;

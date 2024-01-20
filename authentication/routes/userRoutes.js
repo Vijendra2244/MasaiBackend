@@ -11,7 +11,7 @@ const auth = require("../middleware/authmiddleware");
 
 userRouter.route("/").get(getAllUser);
 
-userRouter.route("/about").get(auth, aboutUser);
+userRouter.route("/about").get( aboutUser);
 
 userRouter.route("/register").post(register);
 userRouter.route("/login").post(loginUsers);

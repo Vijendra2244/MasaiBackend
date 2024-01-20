@@ -1,20 +1,13 @@
 const mongoose = require("mongoose");
 const BlogModel = require("../model/blogModel");
-const jwt = require("jsonwebtoken");
+
 
 const getAllBlog = async (req, res) => {
-  const token = req.headers.authorization;
   try {
-    jwt.verify(token, "auth", async (err, decode) => {
-      if (err) {
-        res.status(401).send("Please login first");
-      } else {
-        const blog = await BlogModel.find();
-        res.status(201).send(blog);
-      }
-    });
+    const blog = await BlogModel.find();
+    res.status(201).send(blog);
   } catch (error) {
-    res.status(401).send("Please login first");
+    res.status(401).send({msg:"Please login first",error});
   }
 };
 const createdBlog = async (req, res) => {
@@ -26,7 +19,7 @@ const createdBlog = async (req, res) => {
       .status(201)
       .send({ msg: "Successfully added a blog", data: { creatingBlog } });
   } catch (error) {
-    res.status(401).send("please login first");
+    res.status(401).send({msg:"please login first",error});
   }
 };
 
