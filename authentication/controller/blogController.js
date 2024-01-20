@@ -10,6 +10,10 @@ const getAllBlog = async (req, res) => {
     res.status(401).send({msg:"Please login first",error});
   }
 };
+
+
+
+
 const createdBlog = async (req, res) => {
   try {
     const blogDetails = req.body;
