@@ -17,7 +17,7 @@ const getAllUser = async (req, res) => {
 const register = async (req, res) => {
   try {
     const { userName, email, password } = req.body;
-    bcrypt.hash(password, process.env.SALT_ROUNDS, async (err, hash) => {
+    bcrypt.hash(password, 5, async (err, hash) => {
       if (err) {
         throw err;
       } else {
@@ -31,6 +31,7 @@ const register = async (req, res) => {
   }
 };
 const loginUsers = async (req, res) => {
+  console.log(req.cookies);
   try {
     const { email, password } = req.body;
     const findTheUser = await UserModel.findOne({ email });
@@ -43,26 +44,18 @@ const loginUsers = async (req, res) => {
         if (err) {
           throw err;
         } else {
-          const token = jwt.sign(
-            { user: "login" },
-            process.env.TOKEN_SECRET_KEY,
-            {
-              expiresIn: expirationTime,
-            }
-          );
+          const access_token = jwt.sign({ user: "login" }, "auth", {
+            expiresIn: expirationTime,
+          });
 
-          const refreshToken = jwt.sign(
-            { user: "login" },
-            process.env.TOKEN_SECRET_KEY,
-            {
-              expiresIn: expirationTime7days,
-            }
-          );
-          res.cookie("access_token", token);
-          res.cookie("resfresh_token", refreshToken);
+          const refreshToken = jwt.sign({ user: "login" }, "auth", {
+            expiresIn: expirationTime7days,
+          });
+          res.cookie("access_token", access_token);
+          res.cookie("refresh_token", refreshToken);
           res.status(200).send({
             msg: "User is login successfully",
-            access_token: token,
+            access_token: access_token,
             refresh_token: refreshToken,
           });
         }
@@ -74,9 +67,10 @@ const loginUsers = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  const token = req.headers.authorization;
+  const token = req.cookies["access_token"];
+  const refresh_token = req.cookies["refresh_token"];
   try {
-    const addedTokenInBlackList = new BlackListModel({ token });
+    const addedTokenInBlackList = new BlackListModel({ token, refresh_token });
     await addedTokenInBlackList.save();
     res.status(200).send("Token added successfully");
   } catch (error) {

@@ -7,12 +7,10 @@ const {
   aboutUser,
   logout,
 } = require("../controller/userController");
-const auth = require("../middleware/authmiddleware");
+
 
 userRouter.route("/").get(getAllUser);
-
 userRouter.route("/about").get( aboutUser);
-
 userRouter.route("/register").post(register);
 userRouter.route("/login").post(loginUsers);
 userRouter.route("/logout").post(logout);

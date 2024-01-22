@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const { connection } = require("./db");
 const userRouter = require("./routes/userRoutes");
 const blogRouter = require("./routes/blogRoute");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser")
 
 dotenv.config();
 
