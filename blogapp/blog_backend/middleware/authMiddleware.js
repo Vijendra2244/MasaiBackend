@@ -4,7 +4,7 @@ const BlackListModel = require("../models/blacklistModel");
 const auth = async (req, res, next) => {
   const access_token = req.cookies["access_token"];
   const refresh_token = req.cookies["refresh_token"];
-  console.log(req.cookies);
+
 
   try {
     const isBlackListedToken = await BlackListModel.exists({
