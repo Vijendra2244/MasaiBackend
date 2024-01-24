@@ -1,25 +1,15 @@
-import { useState,useEffect } from 'react'
-import './App.css'
+import SignUp from "./pages/signup/Signup";
+import { Link } from "react-router-dom";
+import AllRoute from "./route/AllRoute";
 
 function App() {
-  
- const [arr,setArr] = useState([])
-  useEffect(() => {
-    fetch("http://localhost:8080/")
-    .then((res)=>res.json())
-    .then((data)=>setArr(data))
-    .catch((err)=>console.log(err))
-  })
-  
   return (
     <>
-      {
-        arr.map((item)=>(
-          <p>{item}</p>
-        ))
-      }
+      <Link to="/users/register">Register page</Link>
+      <Link to="/">home-page</Link>
+      <AllRoute />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
