@@ -52,7 +52,7 @@ const loginUsers = async (req, res) => {
             expiresIn: expirationTime7days,
           });
           res.cookie("access_token", access_token);
-          res.cookie("refresh_token", refreshToken);
+          res.cookie("refresh_token", refresh_token);
           res.status(200).send({
             msg: "User is login successfully",
             access_token: access_token,
