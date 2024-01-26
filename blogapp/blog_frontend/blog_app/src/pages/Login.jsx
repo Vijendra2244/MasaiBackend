@@ -19,17 +19,17 @@ function Login() {
     e.preventDefault();
     try {
       const userData = await axios.post(
-        "https://impossible-tuna-top-coat.cyclic.app/users/login",
+        "http://localhost:8080/users/login",
         userDetails,
-        {withCredentials:true}
+        { withCredentials: true }
       );
       console.log(userData);
       setUserDetails({
         email: "",
         password: "",
       });
-      if(userDetails.email && userDetails.password){
-        alert("User login successfully")
+      if (userDetails.email && userDetails.password) {
+        alert("User login successfully");
       }
     } catch (error) {
       console.log(error);

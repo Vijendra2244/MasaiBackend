@@ -11,13 +11,15 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
+const corsOptions = {
+  origin: "*",
+  Credential:true
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-const corsOptions = {
-  origin: ["https://impossible-tuna-top-coat.cyclic.app","http://127.0.0.1:5173/"],
-  credentials: true,
-};
-app.use(cors(corsOptions));
+
 
 app.use("/users", userRouter);
 app.use("/blogs", blogRouter);

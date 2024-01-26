@@ -20,8 +20,9 @@ function Register() {
     e.preventDefault();
     try {
       const userData = await axios.post(
-        `https://impossible-tuna-top-coat.cyclic.app/users/register`,
+        "http://localhost:8080/users/register",
         userDetails,
+        { withCredentials: true },
         {
           headers: {
             "Content-Type": "application/json",
