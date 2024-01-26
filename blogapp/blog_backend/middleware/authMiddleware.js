@@ -38,7 +38,7 @@ const auth = async (req, res, next) => {
                 expiresIn: "1d",
               });
 
-              res.cookie("access_token", access_token,{httpOnly:true,secure: true});
+              res.cookie("access_token", access_token);
               res.status(200).send("user access");
               next();
             }

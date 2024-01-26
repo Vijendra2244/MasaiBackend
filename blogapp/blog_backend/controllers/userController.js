@@ -51,14 +51,8 @@ const loginUsers = async (req, res) => {
           const refresh_token = jwt.sign({ user: "login" }, "auth", {
             expiresIn: expirationTime7days,
           });
-          res.cookie("access_token", access_token, {
-            httpOnly: true,
-            secure: true,
-          });
-          res.cookie("refresh_token", refresh_token, {
-            httpOnly: true,
-            secure: true,
-          });
+          res.cookie("access_token", access_token);
+          res.cookie("refresh_token", refresh_token);
           res.status(200).send({
             msg: "User is login successfully",
             access_token: access_token,
