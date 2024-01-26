@@ -18,7 +18,7 @@ const corsOptions = {
   ],
   credential: true,
 };
-
+app.options("*", cors());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
