@@ -39,6 +39,9 @@ const loginUsers = async (req, res) => {
     const expirationTime = currentTime + 60 * 60;
     const expirationTime7days = currentTime + 7 * 24 * 60 * 60;
 
+    const cookiesOptions = { domain: ".cyclic.app", httpOnly: true, secure: true }
+
+
     if (findTheUser) {
       bcrypt.compare(password, findTheUser.password, (err, result) => {
         if (err) {
@@ -51,8 +54,8 @@ const loginUsers = async (req, res) => {
           const refresh_token = jwt.sign({ user: "login" }, "auth", {
             expiresIn: expirationTime7days,
           });
-          res.cookie("access_token", access_token);
-          res.cookie("refresh_token", refresh_token);
+          res.cookie("access_token", access_token,cookiesOptions);
+          res.cookie("refresh_token", refresh_token,cookiesOptions);
           res.status(200).send({
             msg: "User is login successfully",
             access_token: access_token,

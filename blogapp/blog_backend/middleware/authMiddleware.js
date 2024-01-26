@@ -5,7 +5,6 @@ const auth = async (req, res, next) => {
   const access_token = req.cookies["access_token"];
   const refresh_token = req.cookies["refresh_token"];
 
-
   try {
     const isBlackListedToken = await BlackListModel.exists({
       token: access_token,
@@ -16,6 +15,11 @@ const auth = async (req, res, next) => {
     }
 
     jwt.verify(access_token, "auth", (err, decoded) => {
+      const cookiesOptions = {
+        domain: ".cyclic.app",
+        httpOnly: true,
+        secure: true,
+      };
       if (err) {
         if (err.message === "jwt expired") {
           jwt.verify(refresh_token, "auth", async (err, refreshDecoded) => {
@@ -38,7 +42,7 @@ const auth = async (req, res, next) => {
                 expiresIn: "1d",
               });
 
-              res.cookie("access_token", access_token);
+              res.cookie("access_token", access_token, cookiesOptions);
               res.status(200).send("user access");
               next();
             }
