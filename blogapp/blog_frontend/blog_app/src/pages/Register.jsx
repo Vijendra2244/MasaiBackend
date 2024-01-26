@@ -20,7 +20,7 @@ function Register() {
     e.preventDefault();
     try {
       const userData = await axios.post(
-        "http://localhost:8080/users/register",
+        "https://impossible-tuna-top-coat.cyclic.app/users/register",
         userDetails,
         { withCredentials: true },
         {

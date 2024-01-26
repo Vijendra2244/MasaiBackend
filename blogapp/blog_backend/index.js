@@ -12,14 +12,16 @@ const app = express();
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin: "*",
-  credential:true
-}
+  origin: [
+    "http://127.0.0.1:5173/",
+    "https://impossible-tuna-top-coat.cyclic.app",
+  ],
+  credential: true,
+};
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-
 
 app.use("/users", userRouter);
 app.use("/blogs", blogRouter);
