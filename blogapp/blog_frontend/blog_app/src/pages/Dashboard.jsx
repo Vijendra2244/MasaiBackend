@@ -12,7 +12,7 @@ function Dashboard() {
       );
       console.log(response.data.data);
       setBlogData(response);
-      console.log(document.cookies)
+
     } catch (error) {
       console.error("Error fetching blog data:", error.response);
     }
