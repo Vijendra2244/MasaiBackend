@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
-  origin: ["https://impossible-tuna-top-coat.cyclic.app/"],
+  origin: ["https://impossible-tuna-top-coat.cyclic.app"],
   credentials: true,
 };
 app.use(cors(corsOptions));

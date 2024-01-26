@@ -21,13 +21,9 @@ function Login() {
       const userData = await axios.post(
         `https://impossible-tuna-top-coat.cyclic.app/users/login`,
         userDetails,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        {withCredentials:true}
       );
-      console.log(userData.data);
+      console.log(userData);
       setUserDetails({
         email: "",
         password: "",
