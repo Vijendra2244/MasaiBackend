@@ -22,7 +22,7 @@ function Register() {
       const userData = await axios.post(
         "https://impossible-tuna-top-coat.cyclic.app/users/register",
         userDetails,
-        // { withCredentials: true },
+        { withCredentials: true },
      
       );
       console.log(userData);
