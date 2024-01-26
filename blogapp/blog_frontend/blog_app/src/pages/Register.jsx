@@ -23,13 +23,9 @@ function Register() {
         "https://impossible-tuna-top-coat.cyclic.app/users/register",
         userDetails,
         { withCredentials: true },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+     
       );
-      console.log(userData.data);
+      console.log(userData);
       setUserDetails({
         userName: "",
         email: "",
