@@ -17,7 +17,7 @@ app.use(
       "http://127.0.0.1:5173/",
       "https://impossible-tuna-top-coat.cyclic.app",
     ],
-    credential: true,
+    credentials: true,
   })
 );
 app.use(express.json());
