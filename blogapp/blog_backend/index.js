@@ -13,7 +13,14 @@ const PORT = process.env.PORT;
 
 
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(
+  {
+    httpOnly:true,
+    secure:true,
+    sameSite:'lax',
+    maxAge:1000*60*60
+  }
+));
 app.use(
   cors({
     origin: [
