@@ -1,0 +1,28 @@
+.heading{
+    text-align: center;
+    color: white;
+}
+.mainContainer{
+    width: 80%;
+    margin: auto;
+}
+.formContainer{
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 1rem;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+    border: 2px solid white;
+    margin-bottom: 1rem;
+}
+.link {
+    text-decoration: none;
+    color: white;
+}

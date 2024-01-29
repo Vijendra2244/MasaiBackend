@@ -1,0 +1,16 @@
+.heading{
+    text-align: center;
+    color: white;
+}
+.mainContainer{
+    width: 80%;
+    margin: auto;
+}
+.formContainer{
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 1rem;
+}

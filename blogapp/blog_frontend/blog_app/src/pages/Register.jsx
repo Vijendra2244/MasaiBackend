@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "./Register.module.css"
 
 function Register() {
   const [userDetails, setUserDetails] = useState({
@@ -37,9 +38,9 @@ function Register() {
   };
 
   return (
-    <div>
-      <h1>Register user</h1>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.mainContainer}>
+      <h1 className={styles.heading}>Register user</h1>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
         <label htmlFor="userName">Enter your name</label>
         <input
           onChange={handleChange}

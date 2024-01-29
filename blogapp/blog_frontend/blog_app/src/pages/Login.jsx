@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "./Login.module.css"
 
 function Login() {
   const [userDetails, setUserDetails] = useState({
@@ -28,9 +29,9 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login user</h1>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.mainContainer}>
+      <h1 className={styles.heading}>Login user</h1>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
         <label htmlFor="email">Enter your email</label>
         <input
           onChange={handleChange}
