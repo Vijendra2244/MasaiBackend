@@ -16,7 +16,7 @@ const auth = async (req, res, next) => {
 
     jwt.verify(access_token, "auth", (err, decoded) => {
       const cookiesOptions = {
-        domain: ".cyclic.app",
+        sameSite: "none",
         httpOnly: true,
         secure: true,
       };
