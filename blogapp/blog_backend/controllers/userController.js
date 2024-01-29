@@ -31,15 +31,11 @@ const register = async (req, res) => {
   }
 };
 const loginUsers = async (req, res) => {
-  console.log(req.cookies);
   try {
     const { email, password } = req.body;
     const findTheUser = await UserModel.findOne({ email });
-    const currentTime = Math.floor(Date.now() / 1000);
-    const expirationTime = currentTime + 60 * 60;
-    const expirationTime7days = currentTime + 7 * 24 * 60 * 60;
 
-    const cookiesOptions = { httpOnly: true, secure: true };
+    const cookiesOptions = {  httpOnly: true };
 
     if (findTheUser) {
       bcrypt.compare(password, findTheUser.password, (err, result) => {
@@ -47,11 +43,11 @@ const loginUsers = async (req, res) => {
           throw err;
         } else {
           const access_token = jwt.sign({ user: "login" }, "auth", {
-            expiresIn: expirationTime,
+            expiresIn: "1d",
           });
 
           const refresh_token = jwt.sign({ user: "login" }, "auth", {
-            expiresIn: expirationTime7days,
+            expiresIn: "7d",
           });
           res.cookie("access_token", access_token, cookiesOptions);
           res.cookie("refresh_token", refresh_token, cookiesOptions);

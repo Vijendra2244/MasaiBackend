@@ -11,13 +11,12 @@ const auth = async (req, res, next) => {
     });
 
     if (isBlackListedToken) {
-      return res.status(400).send("Token is expired, please login again");
+      return res.status(400).send("Token is expired>>>>>>>>, please login again");
     }
 
     jwt.verify(access_token, "auth", (err, decoded) => {
       const cookiesOptions = {
-        httpOnly: true,
-        secure: true,
+        httpOnly: true
       };
       if (err) {
         if (err.message === "jwt expired") {
@@ -41,7 +40,7 @@ const auth = async (req, res, next) => {
                 expiresIn: "1d",
               });
 
-              res.cookie("access_token", access_token, cookiesOptions);
+              res.cookie("access_token", access_token,cookiesOptions);
               res.status(200).send("user access");
               next();
             }

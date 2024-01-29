@@ -5,6 +5,7 @@ const getAllBlog = async (req, res) => {
   try {
     const blog = await BlogModel.find();
     res.status(201).send(blog);
+
   } catch (error) {
     res.status(401).send({ msg: "Please login first", error });
   }
