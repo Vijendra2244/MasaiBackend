@@ -39,7 +39,7 @@ const loginUsers = async (req, res) => {
     const expirationTime = currentTime + 60 * 60;
     const expirationTime7days = currentTime + 7 * 24 * 60 * 60;
 
-    const cookiesOptions = { httpOnly: true, secure: true, sameSite: "none" };
+    const cookiesOptions = { httpOnly: true, secure: true };
 
     if (findTheUser) {
       bcrypt.compare(password, findTheUser.password, (err, result) => {

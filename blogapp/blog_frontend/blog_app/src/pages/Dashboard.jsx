@@ -10,8 +10,8 @@ function Dashboard() {
         `https://impossible-tuna-top-coat.cyclic.app/blogs/`,
         { withCredentials: true }
       );
-      console.log(response.data.data);
-      setBlogData(response);
+      console.log(response.data);
+       setBlogData(response.data);
 
     } catch (error) {
       console.error("Error fetching blog data:", error.response);
@@ -24,14 +24,13 @@ function Dashboard() {
 
   return (
     <>
-      {blogData.map((item) => (
-        <div key={item.id}>
-          <li>{item.blogTitle}</li>
+      {blogData.map((item,index)=>(
+        <div key={index}>
+
+          <h1>{item.blogTitle}</h1>
           <p>{item.blogDescription}</p>
-          <button>Edit</button>
-          <button>Delete</button>
         </div>
-      ))}
+))}
     </>
   );
 }
