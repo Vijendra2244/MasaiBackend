@@ -15,9 +15,9 @@ const auth = async (req, res, next) => {
     }
 
     jwt.verify(access_token, "auth", (err, decoded) => {
-      const cookiesOptions = {
-        httpOnly: true
-      };
+      // const cookiesOptions = {
+      //   httpOnly: true
+      // };
       if (err) {
         if (err.message === "jwt expired") {
           jwt.verify(refresh_token, "auth", async (err, refreshDecoded) => {
@@ -40,7 +40,7 @@ const auth = async (req, res, next) => {
                 expiresIn: "1d",
               });
 
-              res.cookie("access_token", access_token,cookiesOptions);
+              res.cookie("access_token", access_token);
               res.status(200).send("user access");
               next();
             }

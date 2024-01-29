@@ -35,7 +35,7 @@ const loginUsers = async (req, res) => {
     const { email, password } = req.body;
     const findTheUser = await UserModel.findOne({ email });
 
-    const cookiesOptions = {  httpOnly: true };
+    // const cookiesOptions = {  httpOnly: true };
 
     if (findTheUser) {
       bcrypt.compare(password, findTheUser.password, (err, result) => {
@@ -49,8 +49,8 @@ const loginUsers = async (req, res) => {
           const refresh_token = jwt.sign({ user: "login" }, "auth", {
             expiresIn: "7d",
           });
-          res.cookie("access_token", access_token, cookiesOptions);
-          res.cookie("refresh_token", refresh_token, cookiesOptions);
+          res.cookie("access_token", access_tokek);
+          res.cookie("refresh_token", refresh_token);
           res.status(200).send({
             msg: "User is login successfully",
             access_token: access_token,
