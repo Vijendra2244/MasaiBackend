@@ -15,8 +15,8 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cookieParser(
   {
-    httpOnly:true,
-    secure:true,
+    httpOnly:false,
+    secure:false,
     sameSite:'lax',
     maxAge:1000*60*60
   }
