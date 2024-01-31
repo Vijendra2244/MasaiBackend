@@ -19,6 +19,7 @@ app.use(
     origin: [
       "http://127.0.0.1:5173",
       "https://impossible-tuna-top-coat.cyclic.app",
+      "https://blogapp01001010.netlify.app/",
     ],
     credentials: true,
   })
