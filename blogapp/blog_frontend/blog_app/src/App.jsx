@@ -7,7 +7,7 @@ function App() {
     <>
       <h1 style={{ textAlign: "center", color: "white" }}>Blog application</h1>
       <div className={styles.main}>
-        <Link className={styles.link} to="/">Home</Link>
+ 
         <Link className={styles.link} to="/register">Register</Link>
         <Link className={styles.link} to="/login">Login</Link>
         <Link className={styles.link} to="/dashboard">Dashboard</Link>

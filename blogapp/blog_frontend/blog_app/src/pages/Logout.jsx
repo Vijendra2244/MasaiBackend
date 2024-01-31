@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios"
+import styles from "./Login.module.css"
 
 function Logout() {
   const handleLogout = async (e) => {
@@ -17,7 +18,7 @@ function Logout() {
   };
   return (
     <div>
-      <button onClick={handleLogout}>Logout</button>
+      <button className={styles.btn} onClick={handleLogout}>Logout</button>
     </div>
   );
 }

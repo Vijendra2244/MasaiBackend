@@ -4,7 +4,7 @@ const BlackListModel = require("../model/blacklistmodel");
 const auth = async (req, res, next) => {
   const access_token = req.cookies["access_token"];
   const refresh_token = req.cookies["refresh_token"];
-  console.log(req.cookies);
+
 
   try {
     const isBlackListedToken = await BlackListModel.exists({
@@ -24,6 +24,7 @@ const auth = async (req, res, next) => {
                 .status(400)
                 .send("Refresh token is invalid or expired");
             } else {
+              
               const isRefreshTokenBlacklisted = await BlackListModel.exists({
                 token: refresh_token,
               });
@@ -34,7 +35,7 @@ const auth = async (req, res, next) => {
                   .send("Refresh token is expired, please login again");
               }
 
-              const access_token = jwt.sign({ user: "login" }, "auth", {
+              const access_token = jwt.sign({  _id: refreshDecoded.userId }, "auth", {
                 expiresIn: "1d",
               });
 
@@ -45,6 +46,10 @@ const auth = async (req, res, next) => {
           });
         }
       } else {
+         if(req.url=="/addblog"){
+           req.body.userId= decoded.userId
+           req.body.userName = decoded.userName
+          }
         next();
       }
     });

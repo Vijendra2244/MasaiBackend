@@ -23,6 +23,11 @@ function Login() {
         "https://impossible-tuna-top-coat.cyclic.app/users/login", userDetails, {withCredentials:true}
       );
       console.log(userData);
+    
+      setUserDetails({
+        email:"",
+        password:""
+      })
     } catch (error) {
       console.log(error);
     }

@@ -25,7 +25,6 @@ const register = async (req, res) => {
   }
 };
 const loginUsers = async (req, res) => {
-  console.log(req.cookies);
   try {
     const { email, password } = req.body;
     const findTheUser = await UserModel.findOne({ email });
@@ -40,17 +39,10 @@ const loginUsers = async (req, res) => {
       return res.status(401).send({ msg: "Password is incorrect" });
     }
 
-    const currentTime = Math.floor(Date.now() / 1000);
-    const expirationTime = currentTime + 60 * 60;
-    const expirationTime7days = currentTime + 7 * 24 * 60 * 60;
+  
 
-    const access_token = jwt.sign({ user: "login" }, "auth", {
-      expiresIn: expirationTime,
-    });
-
-    const refreshToken = jwt.sign({ user: "login" }, "auth", {
-      expiresIn: expirationTime7days,
-    });
+    const access_token = await findTheUser.generateAccessToken()
+    const refreshToken = await findTheUser.generateRefreshToken()
 
     res.cookie("access_token", access_token);
     res.cookie("refresh_token", refreshToken);

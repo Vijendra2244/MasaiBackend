@@ -10,6 +10,12 @@ const blogSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    userId:{
+      type:String
+    },
+    userName: {
+      type:String
+    }
   },
   { versionKey: false },
   { timestamps: true }

@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import styles from "./Login.module.css"
+import { PortalContext } from "./context/PortalContext";
+// import EditPortal from "./EditPortal";
 
 function Dashboard() {
   const [blogData, setBlogData] = useState([]);
+  const {portal, setPortal} = useContext(PortalContext)
 
   const getAllBlogFromApi = async () => {
     try {
@@ -22,15 +26,21 @@ function Dashboard() {
     getAllBlogFromApi();
   }, []);
 
+  const modalOpen = ()=>{
+    setPortal(true)
+  }
   return (
     <>
       {blogData.map((item,index)=>(
-        <div key={index}>
+        <div className={styles.mainBlog} key={index}>
 
-          <h1>{item.blogTitle}</h1>
-          <p>{item.blogDescription}</p>
+          <h1 className={styles.blogTitle}>{item.blogTitle}</h1>
+          <p className={styles.blogDesc}>{item.blogDescription}</p>
+          <button onClick={modalOpen} className={styles.btn}>Edit</button>
+          <button  className={styles.btn}>Delete</button>
         </div>
 ))}
+ {/* {portal && <EditPortal/>} */}
     </>
   );
 }

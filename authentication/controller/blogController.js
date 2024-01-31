@@ -1,29 +1,26 @@
 const mongoose = require("mongoose");
 const BlogModel = require("../model/blogModel");
 
-
 const getAllBlog = async (req, res) => {
   try {
     const blog = await BlogModel.find();
     res.status(201).send(blog);
   } catch (error) {
-    res.status(401).send({msg:"Please login first",error});
+    res.status(401).send({ msg: "Please login first", error });
   }
 };
 
-
-
-
 const createdBlog = async (req, res) => {
+  const blogDetails = req.body;
+  console.log(blogDetails)
   try {
-    const blogDetails = req.body;
     const creatingBlog = new BlogModel(blogDetails);
     await creatingBlog.save();
     res
       .status(201)
       .send({ msg: "Successfully added a blog", data: { creatingBlog } });
   } catch (error) {
-    res.status(401).send({msg:"please login first",error});
+    res.status(401).send({ msg: "please login first", error });
   }
 };
 
