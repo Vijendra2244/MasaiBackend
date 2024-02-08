@@ -39,10 +39,8 @@ const loginUsers = async (req, res) => {
       return res.status(401).send({ msg: "Password is incorrect" });
     }
 
-  
-
-    const access_token = await findTheUser.generateAccessToken()
-    const refreshToken = await findTheUser.generateRefreshToken()
+    const access_token = await findTheUser.generateAccessToken();
+    const refreshToken = await findTheUser.generateRefreshToken();
 
     res.cookie("access_token", access_token);
     res.cookie("refresh_token", refreshToken);
@@ -58,7 +56,6 @@ const loginUsers = async (req, res) => {
   }
 };
 
-
 const logout = async (req, res) => {
   const token = req.cookies["access_token"];
   const refresh_token = req.cookies["refresh_token"];
@@ -70,6 +67,32 @@ const logout = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+//change password or reset password logic
+
+const changePasswordOrResetPassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword, email } = req.body;
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send({ msg: "User not found" });
+    }
+
+    const passwordValidation = await user.comparePassword(oldPassword);
+    if (!passwordValidation) {
+      return res.status(401).send({ msg: "Your old password is incorrect" });
+    }
+
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false });
+    res.status(200).send({ msg: "Your password has been changed successfully" });
+  } catch (error) {
+    res.status(400).send({ err: error.message });
+  }
+};
+
+
 
 const aboutUser = async (req, res, next) => {
   // const token = req.headers.authorization;
@@ -92,4 +115,5 @@ module.exports = {
   loginUsers,
   aboutUser,
   logout,
+  changePasswordOrResetPassword,
 };

@@ -46,10 +46,8 @@ const auth = async (req, res, next) => {
           });
         }
       } else {
-         if(req.url=="/addblog"){
            req.body.userId= decoded.userId
            req.body.userName = decoded.userName
-          }
         next();
       }
     });
